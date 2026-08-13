@@ -1,10 +1,13 @@
 import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
-import { Obra, Contratista } from './types';
+import type { Proyecto } from './types.js';
 
-const dataPath = join(__dirname, '..', 'data', 'obras.json');
-
-export async function leerDataset(): Promise<{ obras: Obra[]; contratistas: Contratista[] }> {
-  const raw = await readFile(dataPath, 'utf-8');
-  return JSON.parse(raw) as { obras: Obra[]; contratistas: Contratista[] };
+export async function readCatalog(path: string): Promise<Proyecto[]> {
+  let raw: string;
+  try {
+    raw = await readFile(path, 'utf-8');
+  } catch {
+    console.error(`Error: no se encontró el catálogo en "${path}".`);
+    process.exit(1);
+  }
+  return JSON.parse(raw) as Proyecto[];
 }

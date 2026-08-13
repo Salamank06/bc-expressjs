@@ -1,12 +1,13 @@
 {
-  "name": "semana01-proyecto-constructora",
+  "name": "semana01-catalogo-constructora",
   "version": "1.0.0",
-  "description": "Proyecto semanal — Procesador de datos con Node.js + TypeScript (Constructora)",
+  "description": "Proyecto semanal — Catálogo de proyectos de construcción con reporte de presupuesto y obras activas (dominio: Constructora)",
   "engines": {
     "node": ">=22.0.0"
   },
   "scripts": {
     "dev": "tsx src/index.ts",
+    "dev:umbral": "tsx src/index.ts --umbral 3",
     "build": "tsc --noEmit",
     "start": "node dist/src/index.js"
   },
@@ -14,5 +15,6 @@
     "@types/node": "22.15.21",
     "tsx": "4.19.4",
     "typescript": "5.8.3"
-  }
+  },
+  "type": "module"
 }

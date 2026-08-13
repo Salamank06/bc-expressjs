@@ -1,29 +1,26 @@
+export type TipoObra = 'casa' | 'edificio' | 'local' | 'bodega';
 export type FaseObra = 'cimentacion' | 'estructura' | 'instalaciones' | 'acabados' | 'entrega';
 
-export interface Obra {
+export interface Proyecto {
   id: number;
-  nombre: string;
-  fase: FaseObra;
-  presupuesto: number;
-  contratistaId: number;
+  name: string;
+  type: TipoObra;
+  phase: FaseObra;
+  budget: number;
+  contractor: string;
+  progress: number;
+  active: boolean;
 }
 
-export interface Contratista {
-  id: number;
-  nombre: string;
-  especialidad: 'albañileria' | 'electricidad' | 'plomeria' | 'pintura' | 'carpinteria' | 'soldadura';
+export interface Summary {
+  total: number;
+  active: number;
+  inactive: number;
+  totalBudget: number;
+  lowestProgressProject: Proyecto | null;
 }
 
-export interface Reporte {
-  generadoEn: string;
-  totalObras: number;
-  presupuestoTotal: number;
-  porFase: Record<FaseObra, number>;
-  porContratista: Array<{
-    contratistaId: number;
-    nombre: string;
-    especialidad: string;
-    obrasAsignadas: number;
-    presupuestoAsignado: number;
-  }>;
+export interface Report {
+  summary: Summary;
+  lowProgressAlerts: Proyecto[];
 }

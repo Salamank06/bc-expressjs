@@ -1,10 +1,8 @@
-import { writeFile } from 'node:fs/promises';
-import { join } from 'node:path';
-import { Reporte } from './types';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { dirname } from 'node:path';
+import type { Report } from './types.js';
 
-const outputPath = join(__dirname, '..', 'data', 'reporte.json');
-
-export async function escribirReporte(reporte: Reporte): Promise<string> {
-  await writeFile(outputPath, JSON.stringify(reporte, null, 2), 'utf-8');
-  return outputPath;
+export async function writeReport(report: Report, path: string): Promise<void> {
+  await mkdir(dirname(path), { recursive: true });
+  await writeFile(path, JSON.stringify(report, null, 2), 'utf-8');
 }

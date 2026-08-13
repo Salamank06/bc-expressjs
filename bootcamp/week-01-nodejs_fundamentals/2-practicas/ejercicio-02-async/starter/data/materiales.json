@@ -1,9 +1,0 @@
-[
-  { "id": 1, "nombre": "Cemento gris x 50kg", "unidad": "kg", "precioUnidad": 32000, "stock": 800 },
-  { "id": 2, "nombre": "Varilla corrugada 1/2 pulgada x 6m", "unidad": "unidad", "precioUnidad": 24500, "stock": 320 },
-  { "id": 3, "nombre": "Arena de río m3", "unidad": "m3", "precioUnidad": 145000, "stock": 60 },
-  { "id": 4, "nombre": "Ladrillo tolete x unidad", "unidad": "unidad", "precioUnidad": 1800, "stock": 5400 },
-  { "id": 5, "nombre": "Pintura vinilo blanco x caneca 5 gal", "unidad": "unidad", "precioUnidad": 285000, "stock": 24 },
-  { "id": 6, "nombre": "Cable cobre #12 AWG x m", "unidad": "ml", "precioUnidad": 6500, "stock": 1500 },
-  { "id": 7, "nombre": "Tubería PVC 1 pulgada x m", "unidad": "ml", "precioUnidad": 9800, "stock": 420 }
-]

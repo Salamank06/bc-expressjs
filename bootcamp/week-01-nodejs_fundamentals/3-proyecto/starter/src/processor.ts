@@ -1,37 +1,21 @@
-import { Obra, Contratista, Reporte, FaseObra } from './types';
+import type { Proyecto, Summary } from './types.js';
 
-export function generarReporte(obras: Obra[], contratistas: Contratista[]): Reporte {
-  const porFase: Record<FaseObra, number> = {
-    cimentacion: 0,
-    estructura: 0,
-    instalaciones: 0,
-    acabados: 0,
-    entrega: 0,
-  };
-
-  let presupuestoTotal = 0;
-  for (const o of obras) {
-    presupuestoTotal += o.presupuesto;
-    porFase[o.fase] += 1;
-  }
-
-  const porContratista = contratistas.map((c) => {
-    const obrasAsignadas = obras.filter((o) => o.contratistaId === c.id);
-    const presupuestoAsignado = obrasAsignadas.reduce((acc, o) => acc + o.presupuesto, 0);
-    return {
-      contratistaId: c.id,
-      nombre: c.nombre,
-      especialidad: c.especialidad,
-      obrasAsignadas: obrasAsignadas.length,
-      presupuestoAsignado,
-    };
-  });
-
+export function summarize(proyectos: Proyecto[]): Summary {
+  const active = proyectos.filter((p) => p.active).length;
+  const totalBudget = proyectos.reduce((acc, p) => acc + p.budget, 0);
+  const lowestProgressProject = proyectos.reduce<Proyecto | null>(
+    (lowest, p) => (lowest === null || p.progress < lowest.progress ? p : lowest),
+    null,
+  );
   return {
-    generadoEn: new Date().toISOString(),
-    totalObras: obras.length,
-    presupuestoTotal,
-    porFase,
-    porContratista,
+    total: proyectos.length,
+    active,
+    inactive: proyectos.length - active,
+    totalBudget,
+    lowestProgressProject,
   };
+}
+
+export function findLowProgress(proyectos: Proyecto[], umbral: number): Proyecto[] {
+  return proyectos.filter((p) => p.progress <= umbral);
 }
