@@ -1,0 +1,735 @@
+     1	# 🤖 Instrucciones para GitHub Copilot
+     2	
+     3	## 📋 Contexto del Bootcamp
+     4	
+     5	Este es un **Bootcamp de ExpressJS Zero to Hero** estructurado para llevar a
+     6	desarrolladores con experiencia en JavaScript/TypeScript hasta el desarrollo de
+     7	APIs REST profesionales, seguras y listas para producción con Node.js y Express.
+     8	
+     9	### 📊 Datos del Bootcamp
+    10	
+    11	- **Duración**: 16 semanas (~4 meses)
+    12	- **Dedicación semanal**: 8 horas
+    13	- **Total de horas**: ~128 horas
+    14	- **Nivel de entrada**: Desarrollador con experiencia en JS/TS moderno
+    15	- **Nivel de salida**: Desarrollador Backend Junior (Node.js / Express)
+    16	- **Enfoque**: APIs REST modernas con Express, TypeScript, Prisma y PostgreSQL
+    17	- **Stack**: Node.js 22+, Express 5, TypeScript 5.x, Prisma, PostgreSQL, Redis, Jest
+    18	
+    19	---
+    20	
+    21	## 🎯 Objetivos de Aprendizaje
+    22	
+    23	Al finalizar el bootcamp, los estudiantes serán capaces de:
+    24	
+    25	- ✅ Dominar el runtime de Node.js y el modelo de I/O no bloqueante
+    26	- ✅ Construir servidores HTTP con Express 5 y TypeScript desde cero
+    27	- ✅ Diseñar APIs REST siguiendo buenas prácticas (versioning, status codes, contratos)
+    28	- ✅ Validar y sanitizar datos de entrada con Zod
+    29	- ✅ Implementar persistencia con Prisma ORM + PostgreSQL y con Mongoose + MongoDB
+    30	- ✅ Autenticar usuarios con bcrypt, JWT (access/refresh tokens) y cookies HttpOnly
+    31	- ✅ Controlar acceso con RBAC (Role-Based Access Control)
+    32	- ✅ Aplicar seguridad OWASP: Helmet, rate limiting, CORS, sanitización
+    33	- ✅ Escribir tests unitarios e integration con Jest + Supertest
+    34	- ✅ Gestionar archivos con Multer y almacenamiento en S3/Cloudinary
+    35	- ✅ Implementar comunicación en tiempo real con Socket.io
+    36	- ✅ Usar Redis para caché y gestión de sesiones
+    37	- ✅ Documentar APIs con OpenAPI/Swagger
+    38	- ✅ Dockerizar aplicaciones y desplegarlas con CI/CD en producción
+    39	
+    40	---
+    41	
+    42	## 📚 Estructura del Bootcamp
+    43	
+    44	### Distribución por Fases
+    45	
+    46	#### **Fundamentos (Semanas 1-2)** — 16 horas
+    47	
+    48	- Runtime Node.js: event loop, módulos ESM, async/await, streams
+    49	- TypeScript para backend: tsconfig, tipos, interfaces, generics
+    50	- Express 5: servidor HTTP, routing, middleware chain, req/res lifecycle
+    51	- Manejo de errores global y logging básico
+    52	
+    53	#### **Core API (Semanas 3-8)** — 48 horas
+    54	
+    55	- Arquitectura en capas: routes → controllers → services → repositories
+    56	- Validación de schemas con Zod y manejo centralizado de errores
+    57	- Base de datos relacional: PostgreSQL + Prisma ORM, migraciones, relaciones
+    58	- Base de datos NoSQL: MongoDB + Mongoose, comparativa y casos de uso
+    59	- Autenticación: bcrypt, JWT access/refresh tokens, cookies HttpOnly
+    60	- Autorización & seguridad: RBAC, Helmet, rate limiting, CORS, sanitización
+    61	
+    62	#### **Avanzado (Semanas 9-13)** — 40 horas
+    63	
+    64	- Testing: Jest + Supertest, unit/integration, mocks, cobertura
+    65	- File uploads & emails: Multer, S3/Cloudinary, Nodemailer
+    66	- WebSockets: Socket.io, rooms, autenticación WS, patrones real-time
+    67	- Caching & performance: Redis, paginación eficiente, compresión
+    68	- Documentación: OpenAPI/Swagger, versionado, contratos de API
+    69	
+    70	#### **Producción (Semanas 14-16)** — 24 horas
+    71	
+    72	- Docker: Dockerfile multi-stage, docker-compose, secrets, variables de entorno
+    73	- CI/CD: GitHub Actions, Railway/Render, monitoring con Logtail
+    74	- Proyecto final integrador (semana 16)
+    75	
+    76	### Contenido Semana a Semana
+    77	
+    78	| Semana | Slug                        | Tema                                                         |
+    79	| ------ | --------------------------- | ------------------------------------------------------------ |
+    80	| 01     | `nodejs_fundamentals`       | Node.js runtime, módulos ESM, async/await, TypeScript config |
+    81	| 02     | `express_intro`             | Servidor HTTP, routing, middleware, req/res lifecycle        |
+    82	| 03     | `rest_api_arquitectura`     | Capas routes/controllers/services, HTTP status codes, REST   |
+    83	| 04     | `validacion_error_handling` | Zod, middleware global de errores, logging con Winston       |
+    84	| 05     | `postgresql_prisma`         | PostgreSQL + Prisma ORM, migraciones, relaciones             |
+    85	| 06     | `mongodb_mongoose`          | MongoDB + Mongoose, comparativa, casos de uso                |
+    86	| 07     | `autenticacion_jwt`         | bcrypt, JWT access/refresh tokens, cookies HttpOnly          |
+    87	| 08     | `autorizacion_seguridad`    | RBAC, Helmet, rate limiting, CORS, sanitización              |
+    88	| 09     | `testing`                   | Jest + Supertest, unit/integration, mocks, cobertura         |
+    89	| 10     | `uploads_emails`            | Multer, S3/Cloudinary, Nodemailer                            |
+    90	| 11     | `websockets`                | Socket.io, rooms, autenticación WS, patrones real-time       |
+    91	| 12     | `caching_performance`       | Redis, paginación eficiente, compresión                      |
+    92	| 13     | `openapi_swagger`           | OpenAPI/Swagger, versionado, contratos de API                |
+    93	| 14     | `docker`                    | Dockerfile multi-stage, docker-compose, secrets              |
+    94	| 15     | `cicd_deployment`           | GitHub Actions, Railway/Render, monitoring                   |
+    95	| 16     | `proyecto_final`            | Arquitectura completa, code review, presentación             |
+    96	
+    97	---
+    98	
+    99	## 🗂️ Estructura de Carpetas
+   100	
+   101	Cada semana sigue esta estructura estándar:
+   102	
+   103	```
+   104	bootcamp/week-XX-tema_principal/
+   105	├── README.md                 # Descripción y objetivos de la semana
+   106	├── rubrica-evaluacion.md     # Criterios de evaluación detallados
+   107	├── 0-assets/                 # Imágenes, diagramas y recursos visuales
+   108	├── 1-teoria/                 # Material teórico (archivos .md)
+   109	├── 2-practicas/              # Ejercicios guiados paso a paso
+   110	├── 3-proyecto/               # Proyecto semanal integrador
+   111	│   ├── README.md             # Instrucciones del proyecto
+   112	│   ├── starter/              # Código inicial para el estudiante
+   113	│   └── solution/             # ⚠️ OCULTA - Solo para instructores (.gitignore)
+   114	├── 4-recursos/               # Recursos adicionales
+   115	│   ├── ebooks-free/          # Libros electrónicos gratuitos
+   116	│   ├── videografia/          # Videos y tutoriales recomendados
+   117	│   └── webgrafia/            # Enlaces y documentación
+   118	└── 5-glosario/               # Términos clave de la semana (A-Z)
+   119	    └── README.md
+   120	```
+   121	
+   122	### 📁 Carpetas Raíz
+   123	
+   124	- **`assets/`**: Recursos visuales globales (logos, headers, etc.)
+   125	- **`docs/`**: Documentación general que aplica a todo el bootcamp
+   126	- **`scripts/`**: Scripts de automatización y utilidades
+   127	- **`bootcamp/`**: Contenido semanal del bootcamp
+   128	
+   129	---
+   130	
+   131	## 🎓 Componentes de Cada Semana
+   132	
+   133	### 1. **Teoría** (1-teoria/)
+   134	
+   135	- Archivos markdown con explicaciones conceptuales
+   136	- Ejemplos de código con comentarios educativos en español
+   137	- Diagramas SVG cuando sea necesario (nunca ASCII art)
+   138	- Referencias a documentación oficial de Node.js, Express y librerías del stack
+   139	- **Extensión objetivo: ~150 líneas por archivo** (no superar 200 líneas — dividir en archivos temáticos si es necesario)
+   140	
+   141	### 2. **Prácticas** (2-practicas/)
+   142	
+   143	- Ejercicios guiados paso a paso
+   144	- Incremento progresivo de dificultad
+   145	- Código comentado y explicado
+   146	- Casos de uso del mundo real en contexto de APIs REST
+   147	
+   148	#### 📋 Formato de Ejercicios
+   149	
+   150	Los ejercicios son **tutoriales guiados**, NO tareas con TODOs. El estudiante aprende descomentando código:
+   151	
+   152	**README.md del ejercicio:**
+   153	
+   154	```markdown
+   155	### Paso 1: Crear un router básico en Express
+   156	
+   157	Explicación del concepto con ejemplo:
+   158	
+   159	\`\`\`ts
+   160	// Ejemplo explicativo
+   161	const router = Router();
+   162	router.get('/items', async (req, res) => {
+   163	const items = await itemService.findAll();
+   164	res.json(items);
+   165	});
+   166	\`\`\`
+   167	
+   168	**Abre `starter/src/routes/items.ts`** y descomenta la sección correspondiente.
+   169	```
+   170	
+   171	**starter/src/routes/items.ts:**
+   172	
+   173	```ts
+   174	// ============================================
+   175	// PASO 1: Router básico de Express
+   176	// ============================================
+   177	
+   178	// Este router maneja las rutas del recurso items
+   179	// Descomenta las siguientes líneas:
+   180	// const router = Router();
+   181	// router.get('/items', async (req, res) => {
+   182	//   const items = await itemService.findAll();
+   183	//   res.json(items);
+   184	// });
+   185	```
+   186	
+   187	> ⚠️ **IMPORTANTE**: Los ejercicios NO tienen carpeta `solution/`. El estudiante aprende descomentando el código y verificando que funcione correctamente.
+   188	
+   189	#### ❌ NO usar este formato en ejercicios:
+   190	
+   191	```ts
+   192	// ❌ INCORRECTO - Este formato es para PROYECTOS, no ejercicios
+   193	router.get("/items", async (req, res) => {
+   194	  // TODO: Implementar listado de items
+   195	  res.json([]);
+   196	});
+   197	```
+   198	
+   199	#### ✅ Usar este formato en ejercicios:
+   200	
+   201	```ts
+   202	// ✅ CORRECTO - Código comentado para descomentar
+   203	// Descomenta las siguientes líneas:
+   204	// router.get('/items', async (req, res) => {
+   205	//   const items = await itemService.findAll();
+   206	//   res.json(items);
+   207	// });
+   208	```
+   209	
+   210	### 3. **Proyecto** (3-proyecto/)
+   211	
+   212	- Proyecto integrador que consolida lo aprendido en la semana
+   213	- README.md con instrucciones claras
+   214	- Código inicial en `starter/`
+   215	- Carpeta `solution/` oculta (en `.gitignore`) solo para instructores
+   216	- Criterios de evaluación específicos
+   217	- **Política de Dominios Únicos**: Cada aprendiz trabaja sobre un dominio diferente
+   218	
+   219	#### 🏛️ Política de Dominios Únicos (Anticopia)
+   220	
+   221	**Cada aprendiz recibe un dominio único asignado por el instructor:**
+   222	
+   223	- 📖 Biblioteca
+   224	- 💊 Farmacia
+   225	- 🏋️ Gimnasio
+   226	- 🏫 Escuela
+   227	- 🏬 Tienda de mascotas
+   228	- 🍽️ Restaurante
+   229	- 🏦 Banco
+   230	- 🚕 Agencia de taxis
+   231	- 🏥 Hospital
+   232	- 🎥 Cine
+   233	- 🏞️ Hotel
+   234	- ✈️ Agencia de viajes
+   235	- 🏎️ Concesionario de autos
+   236	- 👗 Tienda de ropa
+   237	- 🛠️ Taller mecánico
+   238	- Y otros dominios únicos según cantidad de aprendices
+   239	
+   240	**Objetivo:**
+   241	
+   242	- Prevenir copia entre estudiantes
+   243	- Fomentar implementaciones originales
+   244	- Aplicar conceptos generales a contextos específicos
+   245	- Desarrollar capacidad de abstracción y adaptación
+   246	
+   247	**El instructor debe:**
+   248	
+   249	1. Asignar un dominio único a cada aprendiz al inicio del bootcamp
+   250	2. Mantener un registro de dominios asignados
+   251	3. No repetir dominios en el mismo grupo
+   252	4. Validar que las implementaciones sean coherentes con el dominio
+   253	
+   254	#### 📋 Formato de Proyecto (con TODOs)
+   255	
+   256	A diferencia de los ejercicios, el proyecto SÍ usa TODOs para que el estudiante implemente desde cero. **Las instrucciones del proyecto deben ser genéricas y adaptables a cualquier dominio.**
+   257	
+   258	**starter/src/controllers/items.controller.ts:**
+   259	
+   260	```ts
+   261	// ============================================
+   262	// CONTROLLER: ItemsController
+   263	// CRUD del recurso principal del dominio
+   264	// ============================================
+   265	
+   266	// NOTA PARA EL APRENDIZ:
+   267	// Adapta este controlador a tu dominio asignado.
+   268	// Ejemplos:
+   269	// - Biblioteca: controlador de libros
+   270	// - Farmacia: controlador de medicamentos
+   271	// - Gimnasio: controlador de miembros
+   272	
+   273	import { Request, Response, NextFunction } from "express";
+   274	
+   275	export async function getAll(req: Request, res: Response, next: NextFunction) {
+   276	  // TODO: Implementar listado con paginación
+   277	  // Debe retornar { data: Item[], total: number, page: number }
+   278	}
+   279	
+   280	export async function getById(req: Request, res: Response, next: NextFunction) {
+   281	  // TODO: Implementar búsqueda por ID
+   282	  // Manejar 404 si no existe
+   283	}
+   284	
+   285	export async function create(req: Request, res: Response, next: NextFunction) {
+   286	  // TODO: Implementar creación validando con Zod
+   287	  // Retornar 201 con el recurso creado
+   288	}
+   289	```
+   290	
+   291	**El README.md del proyecto debe incluir:**
+   292	
+   293	```markdown
+   294	## 🚀 Proyecto Semanal: [Título Genérico]
+   295	
+   296	### 🎯 Objetivo
+   297	
+   298	Implementar [concepto aprendido] aplicado a tu dominio asignado.
+   299	
+   300	### 📋 Tu Dominio Asignado
+   301	
+   302	**Dominio**: [El instructor te asignará tu dominio]
+   303	
+   304	### ✅ Requisitos Funcionales (Adaptables a tu dominio)
+   305	
+   306	1. Crear endpoint para listar recursos con paginación
+   307	2. Implementar búsqueda/filtrado por campos del dominio
+   308	3. Agregar endpoints de creación, edición y eliminación
+   309	
+   310	### 💡 Ejemplos de Adaptación por Dominio
+   311	
+   312	- **Biblioteca**: Gestionar libros, autores, préstamos
+   313	- **Farmacia**: Gestionar medicamentos, ventas, inventario
+   314	- **Gimnasio**: Gestionar miembros, rutinas, asistencias
+   315	- **Restaurante**: Gestionar platillos, mesas, pedidos
+   316	
+   317	### 🛠️ Entregables
+   318	
+   319	1. API funcional con Postman/Thunder Client screenshots
+   320	2. Código adaptado a tu dominio
+   321	3. README con descripción de tu implementación
+   322	```
+   323	
+   324	### 4. **Recursos** (4-recursos/)
+   325	
+   326	- **ebooks-free/**: Libros gratuitos relevantes
+   327	- **videografia/**: Videos tutoriales complementarios
+   328	- **webgrafia/**: Enlaces a documentación oficial y artículos
+   329	
+   330	### 5. **Glosario** (5-glosario/)
+   331	
+   332	- Términos técnicos ordenados alfabéticamente
+   333	- Definiciones claras y concisas en español
+   334	- Ejemplos de código cuando aplique
+   335	
+   336	---
+   337	
+   338	## 📝 Convenciones de Código
+   339	
+   340	### TypeScript Moderno
+   341	
+   342	```ts
+   343	// ✅ BIEN - interfaces para tipos de dominio
+   344	interface CreateUserDto {
+   345	  email: string;
+   346	  password: string;
+   347	  name: string;
+   348	}
+   349	
+   350	// ✅ BIEN - funciones async tipadas explícitamente
+   351	export async function createUser(dto: CreateUserDto): Promise<User> {
+   352	  const hashed = await bcrypt.hash(dto.password, 10);
+   353	  return prisma.user.create({ data: { ...dto, password: hashed } });
+   354	}
+   355	
+   356	// ✅ BIEN - manejo de errores tipado
+   357	export class AppError extends Error {
+   358	  constructor(
+   359	    public statusCode: number,
+   360	    message: string,
+   361	  ) {
+   362	    super(message);
+   363	  }
+   364	}
+   365	
+   366	// ❌ MAL - sin tipos
+   367	export async function createUser(dto) {
+   368	  return prisma.user.create({ data: dto });
+   369	}
+   370	```
+   371	
+   372	### Nomenclatura
+   373	
+   374	- **Clases y tipos**: PascalCase (`UserService`, `CreateUserDto`)
+   375	- **Funciones y variables**: camelCase (`getUserById`, `accessToken`)
+   376	- **Constantes globales**: UPPER_SNAKE_CASE (`JWT_SECRET`, `MAX_RETRIES`)
+   377	- **Archivos de rutas**: kebab-case (`user.routes.ts`, `auth.routes.ts`)
+   378	- **Archivos de servicios**: camelCase + sufijo (`user.service.ts`)
+   379	- **Archivos de controladores**: camelCase + sufijo (`user.controller.ts`)
+   380	- **Idioma**: inglés para código, español para documentación
+   381	
+   382	### Arquitectura en Capas
+   383	
+   384	```
+   385	src/
+   386	├── app.ts               # Configuración Express (middlewares, rutas)
+   387	├── server.ts            # Entry point (listen, signals)
+   388	├── config/              # Variables de entorno y configuración
+   389	│   └── env.ts
+   390	├── routes/              # Definición de rutas (thin layer)
+   391	│   └── user.routes.ts
+   392	├── controllers/         # Manejo de req/res, llama servicios
+   393	│   └── user.controller.ts
+   394	├── services/            # Lógica de negocio
+   395	│   └── user.service.ts
+   396	├── repositories/        # Acceso a datos (Prisma/Mongoose)
+   397	│   └── user.repository.ts
+   398	├── middlewares/         # Middlewares reutilizables
+   399	│   ├── auth.middleware.ts
+   400	│   └── error.middleware.ts
+   401	├── validators/          # Schemas Zod
+   402	│   └── user.schema.ts
+   403	├── types/               # Tipos e interfaces globales
+   404	│   └── index.ts
+   405	└── utils/               # Funciones utilitarias
+   406	    └── jwt.ts
+   407	```
+   408	
+   409	---
+   410	
+   411	## 🧪 Testing
+   412	
+   413	El bootcamp enseña testing con **Jest** y **Supertest**.
+   414	
+   415	### Estructura de Tests
+   416	
+   417	```ts
+   418	// __tests__/user.service.test.ts
+   419	import { UserService } from "../src/services/user.service";
+   420	import { prismaMock } from "./mocks/prisma.mock";
+   421	
+   422	describe("UserService", () => {
+   423	  it("crea un usuario con contraseña hasheada", async () => {
+   424	    const dto = { email: "test@test.com", password: "123456", name: "Test" };
+   425	    prismaMock.user.create.mockResolvedValue({ id: "1", ...dto });
+   426	
+   427	    const user = await UserService.create(dto);
+   428	
+   429	    expect(user.id).toBe("1");
+   430	    expect(prismaMock.user.create).toHaveBeenCalledTimes(1);
+   431	  });
+   432	});
+   433	```
+   434	
+   435	### Integration Tests con Supertest
+   436	
+   437	```ts
+   438	// __tests__/auth.integration.test.ts
+   439	import request from "supertest";
+   440	import { app } from "../src/app";
+   441	
+   442	describe("POST /api/v1/auth/login", () => {
+   443	  it("retorna 200 y token con credenciales válidas", async () => {
+   444	    const res = await request(app)
+   445	      .post("/api/v1/auth/login")
+   446	      .send({ email: "test@test.com", password: "123456" });
+   447	
+   448	    expect(res.status).toBe(200);
+   449	    expect(res.body).toHaveProperty("accessToken");
+   450	  });
+   451	
+   452	  it("retorna 401 con credenciales inválidas", async () => {
+   453	    const res = await request(app)
+   454	      .post("/api/v1/auth/login")
+   455	      .send({ email: "test@test.com", password: "wrong" });
+   456	
+   457	    expect(res.status).toBe(401);
+   458	  });
+   459	});
+   460	```
+   461	
+   462	---
+   463	
+   464	## 📖 Documentación
+   465	
+   466	### README.md de Semana
+   467	
+   468	Debe incluir:
+   469	
+   470	1. **Título y descripción**
+   471	2. **🎯 Objetivos de aprendizaje**
+   472	3. **📚 Requisitos previos**
+   473	4. **🗂️ Estructura de la semana**
+   474	5. **📝 Contenidos** (con enlaces a teoría/prácticas)
+   475	6. **⏱️ Distribución del tiempo** (8 horas)
+   476	7. **📌 Entregables**
+   477	8. **🔗 Navegación** (anterior/siguiente semana)
+   478	
+   479	### Archivos de Teoría
+   480	
+   481	```markdown
+   482	# Título del Tema
+   483	
+   484	## 🎯 Objetivos
+   485	
+   486	- Objetivo 1
+   487	- Objetivo 2
+   488	
+   489	## 📋 Contenido
+   490	
+   491	### 1. Introducción
+   492	
+   493	### 2. Conceptos Clave
+   494	
+   495	### 3. Ejemplos Prácticos
+   496	
+   497	### 4. Casos de Uso en APIs REST
+   498	
+   499	## 📚 Recursos Adicionales
+   500	
+   501	## ✅ Checklist de Verificación
+   502	```
+   503	
+   504	---
+   505	
+   506	## 🎨 Recursos Visuales y Estándares de Diseño
+   507	
+   508	### Formato de Assets
+   509	
+   510	- ✅ **Preferir SVG** para todos los diagramas, iconos y gráficos
+   511	- ❌ **NO usar ASCII art** para diagramas o visualizaciones
+   512	- ✅ Usar PNG/JPG solo para screenshots de Postman/Thunder Client
+   513	- ✅ Optimizar imágenes antes de incluirlas
+   514	
+   515	### Criterio para Assets SVG por Semana
+   516	
+   517	Los assets SVG en `0-assets/` tienen un propósito educativo específico:
+   518	
+   519	- ✅ Diagramas de arquitectura en capas (routes → controllers → services)
+   520	- ✅ Flujos de autenticación JWT (access/refresh tokens)
+   521	- ✅ Diagramas entidad-relación simplificados
+   522	- ✅ Headers de semana para identificación visual
+   523	
+   524	**Reglas de vinculación:**
+   525	
+   526	1. Todo SVG debe estar **vinculado en al menos un archivo** de teoría o práctica
+   527	2. Usar sintaxis markdown: `![Descripción](../0-assets/nombre.svg)`
+   528	3. Incluir texto alternativo descriptivo para accesibilidad
+   529	4. Nombrar descriptivamente y en orden lógico de lectura: `01-jwt-flow.svg`, `02-layered-architecture.svg`
+   530	
+   531	### Tema Visual
+   532	
+   533	- 🌙 **Tema dark** para todos los assets visuales
+   534	- ❌ **Sin degradés** (gradients) en diseños
+   535	- ✅ Colores sólidos y contrastes claros
+   536	- ✅ Paleta basada en verde Node.js (#68A063) y negro (#222222)
+   537	
+   538	### Tipografía
+   539	
+   540	- ✅ **Fuentes sans-serif** exclusivamente (Inter, Roboto, System UI)
+   541	- ❌ **NO usar fuentes serif**
+   542	- ✅ Mantener jerarquía visual clara
+   543	
+   544	---
+   545	
+   546	## 🌐 Idioma y Nomenclatura
+   547	
+   548	### Código y Comentarios Técnicos
+   549	
+   550	- ✅ **Nomenclatura en inglés** (variables, funciones, clases, tipos)
+   551	- ✅ **Comentarios de código en inglés**
+   552	- ✅ Usar términos técnicos estándar de la industria
+   553	
+   554	```ts
+   555	// ✅ CORRECTO - inglés
+   556	async function getUserById(userId: string): Promise<User | null> {
+   557	  // Fetch user from database by primary key
+   558	  return prisma.user.findUnique({ where: { id: userId } });
+   559	}
+   560	
+   561	// ❌ INCORRECTO - español en código
+   562	async function obtenerUsuarioPorId(idUsuario: string): Promise<Usuario | null> {
+   563	  // Buscar usuario en base de datos por llave primaria
+   564	  return prisma.usuario.findUnique({ where: { id: idUsuario } });
+   565	}
+   566	```
+   567	
+   568	### Documentación
+   569	
+   570	- ✅ **Documentación en español** (READMEs, teoría, guías)
+   571	- ✅ Comentarios educativos en español cuando expliquen conceptos
+   572	
+   573	```ts
+   574	// ✅ CORRECTO - código en inglés, explicación educativa en español
+   575	function generateAccessToken(payload: TokenPayload): string {
+   576	  // El access token tiene vida corta (15 min) para limitar el daño
+   577	  // si es interceptado. El refresh token renueva el ciclo.
+   578	  return jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: "15m" });
+   579	}
+   580	```
+   581	
+   582	---
+   583	
+   584	## 🔐 Mejores Prácticas
+   585	
+   586	### Código Limpio
+   587	
+   588	- Nombres descriptivos y significativos
+   589	- Funciones con una sola responsabilidad
+   590	- Evitar anidamiento profundo (early returns)
+   591	- Controladores delgados — lógica de negocio en services
+   592	
+   593	### Seguridad
+   594	
+   595	- Nunca almacenar contraseñas en texto plano (siempre bcrypt)
+   596	- Validar todos los inputs de entrada con Zod en la capa de controllers
+   597	- No exponer stack traces en respuestas de producción
+   598	- Usar variables de entorno para secretos (nunca hardcodear)
+   599	- Aplicar Helmet en todas las apps Express
+   600	- Rate limiting en endpoints de autenticación y endpoints públicos
+   601	- Sanitizar inputs para prevenir NoSQL injection y XSS
+   602	- Cookies HttpOnly + Secure + SameSite para tokens de sesión
+   603	
+   604	### Rendimiento
+   605	
+   606	- Paginación en todos los endpoints de listado (cursor o offset)
+   607	- Índices en columnas frecuentemente consultadas (Prisma migrations)
+   608	- Usar Redis para caché de respuestas costosas
+   609	- Compresión gzip con `compression` middleware
+   610	- Evitar N+1 queries (usar `include` en Prisma con criterio)
+   611	
+   612	---
+   613	
+   614	## 📊 Evaluación
+   615	
+   616	Cada semana incluye **tres tipos de evidencias**:
+   617	
+   618	1. **Conocimiento 🧠** (30%): Evaluaciones teóricas, cuestionarios
+   619	2. **Desempeño 💪** (40%): Ejercicios prácticos en clase
+   620	3. **Producto 📦** (30%): Proyecto entregable funcional
+   621	
+   622	### Criterios de Aprobación
+   623	
+   624	- Mínimo **70%** en cada tipo de evidencia
+   625	- Entrega puntual de proyectos
+   626	- API funcional y probada con Postman/Thunder Client
+   627	- Tests pasando (cuando aplique)
+   628	- **Implementación coherente con el dominio asignado**
+   629	- **Originalidad**: Sin copia de implementaciones de otros aprendices
+   630	
+   631	---
+   632	
+   633	## 🚀 Metodología de Aprendizaje
+   634	
+   635	### Estrategias Didácticas
+   636	
+   637	- **Aprendizaje Basado en Proyectos (ABP)**: Proyectos semanales integradores
+   638	- **Dominios Únicos**: Cada aprendiz aplica conceptos a su dominio asignado (anticopia)
+   639	- **Práctica Deliberada**: Ejercicios incrementales con feedback inmediato
+   640	- **API-First Thinking**: Siempre pensar en contratos, status codes y consumidores
+   641	- **Code Review**: Revisión de código entre estudiantes
+   642	- **Live Coding**: Sesiones en vivo de programación
+   643	
+   644	### Distribución del Tiempo (8h/semana)
+   645	
+   646	- **Teoría**: 2 horas
+   647	- **Prácticas**: 3-4 horas
+   648	- **Proyecto**: 2-3 horas
+   649	
+   650	---
+   651	
+   652	## 🤖 Instrucciones para Copilot
+   653	
+   654	Cuando trabajes en este proyecto:
+   655	
+   656	### Límites de Respuesta
+   657	
+   658	1. **Divide respuestas largas**
+   659	   - ❌ **NUNCA generar respuestas que superen los límites de tokens**
+   660	   - ✅ **SIEMPRE dividir contenido extenso en múltiples entregas**
+   661	   - ✅ Crear contenido por secciones, esperar confirmación del usuario
+   662	   - ✅ Priorizar calidad sobre cantidad en cada entrega
+   663	
+   664	2. **Estrategia de División**
+   665	   - Para semanas completas: dividir por carpetas (teoria → practicas → proyecto)
+   666	   - Para archivos grandes: dividir por secciones lógicas
+   667	   - Siempre indicar claramente qué parte se entrega y qué falta
+   668	
+   669	### Generación de Código
+   670	
+   671	1. **Usa siempre TypeScript moderno (5.x)**
+   672	   - Tipos explícitos obligatorios en funciones y retornos
+   673	   - `interface` para DTOs y tipos de dominio
+   674	   - Genéricos nativos (`Array<string>` o `string[]`)
+   675	
+   676	2. **Entorno de Desarrollo**
+   677	   - ✅ Node.js 22+ con módulos ESM o CommonJS según contexto
+   678	   - ✅ `tsconfig.json` con `strict: true`
+   679	   - ✅ Variables de entorno con validación Zod en `config/env.ts`
+   680	
+   681	3. **Gestión de Paquetes**
+   682	   - ✅ **SOLO usar `pnpm`** como gestor de paquetes
+   683	   - ✅ Versiones exactas siempre (sin `^`, `~`, `*`)
+   684	   - ❌ **NUNCA usar `npm` ni `yarn`**
+   685	   - Comandos: `pnpm add express@5.1.0`, `pnpm add -D @types/node@22.0.0`
+   686	
+   687	4. **Seguridad**
+   688	   - Aplicar principios OWASP Top 10 en todos los ejemplos
+   689	   - Nunca generar código con secretos hardcodeados
+   690	   - Siempre validar inputs antes de procesarlos
+   691	
+   692	### Creación de Contenido
+   693	
+   694	1. **Estructura clara y progresiva**
+   695	   - De lo simple a lo complejo
+   696	   - Conceptos construidos sobre conocimientos previos
+   697	   - Siempre contextualizar en el mundo de las APIs REST
+   698	
+   699	2. **Ejemplos del mundo real**
+   700	   - APIs que los estudiantes reconocen (e-commerce, auth, CRUD)
+   701	   - Casos de uso prácticos en contexto backend
+   702	   - Proyectos que los estudiantes puedan mostrar en portafolios
+   703	
+   704	3. **Enfoque moderno**
+   705	   - No mencionar características obsoletas (no callbacks legacy, no `var`)
+   706	   - Enfocarse en Express 5, ESM, async/await nativo
+   707	   - Usar Prisma como ORM principal (Mongoose como alternativa NoSQL)
+   708	
+   709	4. **Comenta el código de manera educativa**
+   710	   - Explica el por qué, no solo el qué
+   711	   - Señala diferencias con frontend cuando aplique
+   712	   - Usa comentarios que enseñen, no solo describan
+   713	
+   714	### Respuestas y Ayuda
+   715	
+   716	1. **Explicaciones claras**
+   717	   - Lenguaje simple y directo
+   718	   - Proporcionar analogías con conceptos conocidos cuando sea útil
+   719	
+   720	2. **Código comentado**
+   721	   - Explicar cada paso importante
+   722	   - Señalar posibles errores comunes en backend
+   723	
+   724	3. **Recursos adicionales**
+   725	   - Referencias a documentación oficial de Node.js y Express
+   726	   - Artículos relevantes de calidad
+   727	
+   728	---
+   729	
+   730	## 📚 Referencias Oficiales
+   731	
+   732	- **Node.js**: https://nodejs.org/docs/latest/api/
+   733	- **Express 5**: https://expressjs.com/
+   734	- **Ty
+… [salida truncada]
