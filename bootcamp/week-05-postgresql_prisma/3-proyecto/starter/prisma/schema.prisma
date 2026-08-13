@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TipoObra {
+  casa
+  edificio
+  local
+  bodega
+}
+
+enum FaseObra {
+  cimentacion
+  estructura
+  instalaciones
+  acabados
+  entrega
+}
+
+model Proyecto {
+  id         Int       @id @default(autoincrement())
+  name       String    @unique
+  type       TipoObra
+  phase      FaseObra
+  budget     Int
+  contractor String
+  progress   Int       @default(0)
+  active     Boolean   @default(true)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  avances Avance[]
+
+  @@index([phase])
+  @@index([active])
+}
+
+model Avance {
+  id         Int      @id @default(autoincrement())
+  date       DateTime
+  phase      FaseObra
+  percentage Int
+  note       String
+  createdAt  DateTime @default(now())
+
+  proyectoId Int
+  proyecto   Proyecto @relation(fields: [proyectoId], references: [id], onDelete: Cascade)
+
+  @@index([proyectoId])
+  @@index([phase])
+}
